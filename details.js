@@ -50,7 +50,8 @@ loginButton.addEventListener("click", () => {
   passwordError.textContent = "";
 
   // POST username and password to json-server endpoint
-  fetch("http://localhost:8000/users", {
+  fetch("/users", {
+
     method: "POST",
     headers: {
       "Content-Type": "application/json"
