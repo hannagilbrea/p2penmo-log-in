@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: #f8f8f8;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+        
+        .settings-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        .settings-header {
+            padding: 16px;
+            font-size: 24px;
+            font-weight: bold;
+            background-color: #3D95CE;
+            color: white;
+            text-align: center;
+        }
+        
+        .settings-section {
+            padding: 8px 0;
+            border-bottom: 1px solid #eaeaea;
+        }
+        
+        .section-title {
+            padding: 8px 16px;
+            font-size: 12px;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-weight: 600;
+        }
+        
+        .settings-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 16px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        
+        .settings-item:hover {
+            background-color: #f5f5f5;
+        }
+        
+        .item-left {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .item-icon {
+            font-size: 20px;
+            width: 24px;
+            text-align: center;
+        }
+        
+        .settings-item .item-name {
+            font-size: 16px;
+            font-weight: 400;
+        }
+        
+        .settings-item .item-name.bold {
+            font-weight: 600;
+        }
+        
+        .item-right {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #999;
+        }
+        
+        .chevron {
+            font-size: 14px;
+        }
+        
+        .divider {
+            height: 8px;
+            background-color: #f8f8f8;
+            margin: 0;
+        }
+        
+        /* Toggle switch styling */
+        .toggle-switch {
+            position: relative;
+            display: inline-block;
+            width: 44px;
+            height: 24px;
+        }
+        
+        .toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+            border-radius: 24px;
+        }
+        
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 20px;
+            width: 20px;
+            left: 2px;
+            bottom: 2px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+        
+        input:checked + .slider {
+            background-color: #3D95CE;
+        }
+        
+        input:checked + .slider:before {
+            transform: translateX(20px);
+        }
+    </style>
+</head>
+<body>
+    <div class="settings-container">
+        <div class="settings-header">Settings</div>
+        
+        <div class="settings-section">
+            <div class="section-title">PREFERENCES</div>
+            
+            <div class="settings-item">
+                <div class="item-left">
+                    <span class="item-icon">👤</span>
+                    <span class="item-name bold">Edit Profile</span>
+                </div>
+                <div class="item-right">
+                    <span class="chevron">></span>
+                </div>
+            </div>
+            
+            <div class="settings-item">
+                <div class="item-left">
+                    <span class="item-icon">💳</span>
+                    <span class="item-name">Payment Methods</span>
+                </div>
+                <div class="item-right">
+                    <span class="chevron">></span>
+                </div>
+            </div>
+            
+            <div class="settings-item">
+                <div class="item-left">
+                    <span class="item-icon">🔒</span>
+                    <span class="item-name">Privacy</span>
+                </div>
+                <div class="item-right">
+                    <span class="chevron">></span>
+                </div>
+            </div>
+            
+            <div class="divider"></div>
+            
+            <div class="settings-item">
+                <div class="item-left">
+                    <span class="item-icon">🔔</span>
+                    <span class="item-name">Notifications</span>
+                </div>
+                <div class="item-right">
+                    <span class="chevron">></span>
+                </div>
+            </div>
+            
+            <div class="settings-item">
+                <div class="item-left">
+                    <span class="item-icon">👥</span>
+                    <span class="item-name">Friends & Social</span>
+                </div>
+                <div class="item-right">
+                    <span class="chevron">></span>
+                </div>
+            </div>
+            
+            <div class="settings-item">
+                <div class="item-left">
+                    <span class="item-icon">📱</span>
+                    <span class="item-name">Change Phone Number</span>
+                </div>
+                <div class="item-right">
+                    <span class="chevron">></span>
+                </div>
+            </div>
+            
+            <div class="settings-item">
+                <div class="item-left">
+                    <span class="item-icon">😀</span>
+                    <span class="item-name">Emoji</span>
+                </div>
+                <div class="item-right">
+                    <span class="chevron">></span>
+                </div>
+            </div>
+            
+            <div class="settings-item">
+                <div class="item-left">
+                    <span class="item-icon">👤</span>
+                    <span class="item-name">Bitmoji</span>
+                </div>
+                <div class="item-right">
+                    <span class="chevron">></span>
+                </div>
+            </div>
+            
+            <div class="settings-item">
+                <div class="item-left">
+                    <span class="item-icon">💬</span>
+                    <span class="item-name">Holler</span>
+                </div>
+                <div class="item-right">
+                    <span class="chevron">></span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="divider"></div>
+        
+        <div class="settings-section">
+            <div class="section-title">BUYING</div>
+            
+            <div class="settings-item">
+                <div class="item-left">
+                    <span class="item-icon">💳</span>
+                    <span class="item-name bold">Venmo Card</span>
+                </div>
+                <div class="item-right">
+                    <span class="chevron">></span>
+                </div>
+            </div>
+            
+            <div class="settings-item">
+                <div class="item-left">
+                    <span class="item-icon">🛒</span>
+                    <span class="item-name">Enable Mobile Web Purchases</span>
+                </div>
+                <div class="item-right">
+                    <label class="toggle-switch">
+                        <input type="checkbox">
+                        <span class="slider"></span>
+                    </label>
+                </div>
+            </div>
+            
+            <div class="settings-item">
+                <div class="item-left">
+                    <span class="item-icon">💲</span>
+                    <span class="item-name">Backup Payment</span>
+                </div>
+                <div class="item-right">
+                    <span class="chevron">></span>
+                </div>
+            </div>
+            
+            <div class="settings-item">
+                <div class="item-left">
+                    <span class="item-icon">🏪</span>
+                    <span class="item-name">Connected Merchants</span>
+                </div>
+                <div class="item-right">
+                    <span class="chevron">></span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Add click event listeners to all settings items
+        document.querySelectorAll('.settings-item').forEach(item => {
+            item.addEventListener('click', function() {
+                const settingName = this.querySelector('.item-name').textContent;
+                console.log(`Setting clicked: ${settingName}`);
+                // Here you would add your logic to handle each setting click
+                // For example, redirect to another page or show a modal
+            });
+        });
+    </script>
+</body>
+</html>

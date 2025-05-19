@@ -1,0 +1,148 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background: #f8f9fb;
+}
+
+.app {
+  max-width: 375px;
+  margin: auto;
+  background: white;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.header {
+  background: #007aff;
+  color: white;
+  padding: 20px;
+  position: relative;
+  text-align: center;
+}
+
+.settings-icons {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  display: flex;
+  gap: 10px;
+}
+
+.profile-pic {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  border: 3px solid white;
+  position: absolute;
+  top: 60px;
+  left: calc(50% - 35px);
+}
+
+.stats {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 60px;
+  padding: 10px 0;
+}
+
+.tabs {
+  display: flex;
+  justify-content: center;
+  margin: 10px 0;
+}
+
+.tabs button {
+  padding: 10px 20px;
+  border: none;
+  background: none;
+  font-weight: bold;
+  color: gray;
+}
+
+.tabs .active {
+  color: black;
+  border-bottom: 2px solid black;
+}
+
+.balances {
+  padding: 20px;
+}
+
+.balance {
+  background: #f2f4f8;
+  padding: 15px;
+  margin-bottom: 15px;
+  border-radius: 12px;
+}
+
+.balance h1 {
+  font-size: 28px;
+}
+
+.balance span {
+  font-size: 18px;
+}
+
+.balance button {
+  background: #007aff;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 20px;
+  margin-top: 10px;
+}
+
+.timestamp {
+  font-size: 12px;
+  color: gray;
+}
+
+.promo {
+  padding: 15px;
+  background: #f2f4f8;
+  border-radius: 12px;
+  margin: 15px;
+}
+
+.bottom-nav {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background: white;
+  border-top: 1px solid #ddd;
+  padding: 10px 0;
+  position: sticky;
+  bottom: 0;
+}
+
+.bottom-nav div {
+  text-align: center;
+  font-size: 14px;
+}
+
+.bottom-nav .center {
+  background: #007aff;
+  color: white;
+  font-size: 22px;
+  width: 50px;
+  height: 50px;
+  line-height: 50px;
+  border-radius: 50%;
+  text-align: center;
+  margin-top: -30px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+.bottom-pic {
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  display: block;
+  margin: auto;
+}

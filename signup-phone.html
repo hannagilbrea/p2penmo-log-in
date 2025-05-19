@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Sign Up - Phone Number | Venmo</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header>
+    <img src="venmo-logo.svg" alt="Venmo Logo">
+  </header>
+
+  <main>
+    <h1>Enter your phone number</h1>
+    <p>We'll text you a code so we can confirm that it's you.</p>
+
+    <form id="phoneForm">
+      <div class="phone-input-container">
+        <input
+          type="tel"
+          id="phoneNumber"
+          placeholder="( _ _ _ ) _ _ _ - _ _ _ _"
+          maxlength="15"
+        />
+        <label for="phoneNumber" id="phoneLabel">Phone Number</label>
+        <button type="button" id="clearButton" aria-label="Clear phone number">&times;</button>
+      </div>
+      <p class="info-text">
+        By tapping Send code, you're confirming that you're authorized to use the number entered and agree to receive SMS texts to verify you own the number. 
+        <br />
+        Carrier fees may apply.
+      </p>
+      <br><br>
+      <button type="submit">Send code</button>
+    </form>
+  </main>
+
+  <footer>
+    <div>
+      <a href="#">Contact Us</a>
+      <a href="#">Manage Cookies</a>
+    </div>
+    <p>Venmo is a service of PayPal, Inc., a licensed provider of money transfer services (NMLS ID: 910457). © 2023 PayPal, Inc.</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forgot Password | Venmo</title>
+    <style>
+        :root {
+            --primary-color: #008CFF;
+            --text-color: #333333;
+            --light-gray: #f5f5f5;
+            --border-color: #e0e0e0;
+            --placeholder-color: #999999;
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: white;
+            color: var(--text-color);
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            padding: 2rem 1rem;
+        }
+        
+        .container {
+            width: 100%;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+        
+        /* Increased max-width for large screens */
+        @media (min-width: 1200px) {
+            .container {
+                max-width: 650px;
+            }
+        }
+        
+        @media (min-width: 992px) {
+            .container {
+                max-width: 600px;
+            }
+        }
+        
+        @media (max-width: 991px) {
+            .container {
+                max-width: 500px;
+            }
+        }
+        
+        .logo {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .logo img {
+            width: 140px; /* Increased logo size */
+            height: auto;
+        }
+        
+        .card {
+            background-color: white;
+            border-radius: 12px;
+            padding: 2.5rem; /* Increased padding */
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        }
+        
+        /* Larger form elements on big screens */
+        @media (min-width: 992px) {
+            .card {
+                padding: 3rem;
+            }
+            
+            h1 {
+                font-size: 2rem;
+                margin-bottom: 2rem;
+            }
+            
+            .description {
+                font-size: 1.1rem;
+                margin-bottom: 2.5rem;
+            }
+            
+            input[type="text"] {
+                padding: 1.2rem;
+                font-size: 1.1rem;
+            }
+            
+            .btn {
+                padding: 1.2rem;
+                font-size: 1.1rem;
+                max-width: 240px; /* Wider button */
+            }
+        }
+        
+        h1 {
+            font-size: 1.75rem;
+            font-weight: 600;
+            text-align: center;
+            margin-bottom: 1.5rem;
+            color: var(--text-color);
+        }
+        
+        .description {
+            text-align: center;
+            font-size: 1rem;
+            margin-bottom: 2rem;
+            color: #666;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        input[type="text"] {
+            width: 100%;
+            padding: 1rem;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+        
+        input[type="text"]:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(0, 140, 255, 0.2);
+        }
+        
+        input[type="text"]::placeholder {
+            color: var(--placeholder-color);
+        }
+        
+        .terms {
+            font-size: 0.875rem;
+            color: #666;
+            margin-bottom: 2rem;
+            line-height: 1.5;
+        }
+        
+        .btn {
+            display: block;
+            width: 100%;
+            padding: 1rem;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            max-width: 200px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .btn-primary:hover {
+            background-color: #0077cc;
+        }
+        
+        .back-link {
+            display: block;
+            text-align: center;
+            color: var(--primary-color);
+            font-weight: 600;
+            text-decoration: none;
+            margin-bottom: 2rem;
+        }
+        
+        .divider {
+            border: none;
+            border-top: 1px solid var(--border-color);
+            margin: 1.5rem 0;
+        }
+        
+        .footer {
+            margin-top: auto;
+            text-align: center;
+            font-size: 0.75rem;
+            color: #666;
+            padding-top: 1.5rem;
+        }
+        
+        .footer-title {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            font-size: 0.875rem;
+        }
+        
+        @media (max-width: 768px) {
+            .card {
+                padding: 1.5rem;
+            }
+            
+            h1 {
+                font-size: 1.5rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            body {
+                padding: 1rem;
+            }
+            
+            .card {
+                padding: 1.25rem;
+                box-shadow: none;
+            }
+            
+            .btn-primary {
+                max-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="logo">
+            <img src="venmo-logo.svg" alt="Venmo Logo" class="venmo-logo">
+        </div>
+        
+        <div class="card">
+            <h1>Forgot your password?</h1>
+            
+            <p class="description">
+                Enter the email or phone number you use with your Venmo account for a link to reset your password.
+            </p>
+            
+            <div class="form-group">
+                <input type="text" placeholder="Enter phone number">
+            </div>
+            
+            <p class="terms">
+                If you enter a phone number, you confirm that you are authorized to use this phone number and expect to receive SMS texts to reset your password. Carrier fees may apply.
+            </p>
+            
+            <button class="btn btn-primary">Submit</button>
+            
+            <a href="index.html" class="back-link">Go to sign-in</a>
+            
+            <hr class="divider">
+            
+            <a href="https://help.venmo.com/cs/contact-us" class="contact-info" target="_blank" style="font-size:14px;text-decoration: none; color: rgb(6, 74, 185);">
+  Contact Us
+</a>
+
+               <p style="font-size: 13px;">
+  Venmo is a service of PayPal, Inc., a licensed provider of money transfer services 
+  (NMS 5.0: $94567). All money transmission is provided by PayPal, Inc. pursuant to 
+  <strong>PayPal, Inc. Network</strong>: © 2021 PayPal, Inc
+</p>
+
+            </div>
+        </div>
+    </div>
+</body>
+</html>

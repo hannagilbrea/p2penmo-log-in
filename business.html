@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Sign Up - Phone Number | Venmo</title>
+  <style>
+    body {
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      background-color: #f9f9f9;
+      padding: 40px 20px;
+      margin: 0;
+      text-align: center;
+      padding-bottom: 120px; 
+      height: 100%;
+       display: flex;
+  flex-direction: column;  /* Stack the content vertically */
+  min-height: 90vh;  /
+    }
+header {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  text-align: left; /* Align logo to left */
+
+}
+
+
+header img {
+  height: 19px; /* Reduced from 40px */
+  width: auto; /* Maintains aspect ratio */
+  margin-left: 4px; /* Adjusted margin */
+    
+}
+    
+    main {
+      margin-top: 40px;
+        padding-bottom: 14px;
+    }
+
+    h1 {
+      font-weight: 550;
+      font-size: 26px;
+      margin-bottom: 10px;
+      color: #353434;
+       letter-spacing: 0.5px;
+      word-spacing: 2px;
+    }
+
+    p {
+      font-size: 18px;
+      color: #555;
+      margin-bottom: 30px;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .info-text {
+      width: 360px;
+      font-size: 15px;
+      color: #777;
+      margin-bottom: 30px;
+    }
+
+    button[type="submit"] {
+      width: 300px;
+      padding: 14px;
+      font-size: 16px;
+      font-weight: 600;
+      color: white;
+      background-color: #0070f3;
+      border: none;
+      border-radius: 9999px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    button[type="submit"]:hover {
+      background-color: #005bb5;
+    }
+
+    .phone-input-container {
+      position: relative;
+      margin: 90px auto 100px;
+      width: 88vw;
+      max-width: 600px;
+  
+    }
+
+    #phoneNumber {
+      width: 100%;
+      padding: 22px 36px 6px 12px;
+      height: 54px;
+        border: 1px solid rgb(131, 127, 127); 
+      border-radius: 9px;
+      font-size: 13px;
+      box-sizing: border-box;
+      transition: all 0.3s ease;
+    }
+
+    #phoneLabel {
+      position: absolute;
+      top: 6px;
+      left: 9px;
+      font-size: 11px;
+      color: #777;
+      transition: all 0.2s ease;
+      pointer-events: none;
+      padding: 0 5px;
+      background: white;
+    }
+
+    #phoneNumber:focus + #phoneLabel {
+      color: #417ed8;
+    }
+
+    #phoneNumber::placeholder {
+      color: #999;
+      opacity: 0;
+      transition: opacity 0.2s;
+    }
+
+    #phoneNumber:focus::placeholder {
+      opacity: 1;
+    }
+
+    #phoneNumber:not(:placeholder-shown)::placeholder {
+      opacity: 0;
+    }
+
+
+
+    footer {
+  padding: 25px;               /* Adds some space around the footer */
+height: 45px;
+  gap: 20px;               /* Space between items */
+  margin-top: auto;   
+     margin-bottom: 3px;  
+   position: static;
+  bottom: 5px; /* Changed from 0 to 5px */
+  width: 100%;
+  background-color: rgb(229, 225, 225); /* Matches the body background */
+}
+
+footer div {
+  display: flex;               /* Flexbox for horizontal layout */
+  align-items: center;         /* Vertically center the items */
+  margin-left: 10px;           /* Adds space from the left */
+  flex-wrap: wrap;             /* Allow wrapping for small screens */
+  position: static;      /* Normal flow */
+    margin-top: auto;      /* Push to bottom if content is short */
+    margin-bottom: 5px; 
+    
+}
+
+footer a {
+  margin-right: 10px;          /* Adds space between the links */
+  text-decoration: none;  
+  color:#286ed7;    /* Removes the underline */
+  font-size: 12px;   
+  padding: 10px 0;            /* Adds space above and below the text */
+}
+
+footer p {
+  font-size: 13px;             
+  color: #666;                
+  margin-top: 10px; 
+           
+}
+
+/* Mobile Footer Fix */
+
+/* Mobile Styles */
+
+@media (max-width: 600px) {
+  html, body {
+    height: auto;
+    margin: 0;
+    padding: 0;
+    display: flex;
+  flex-direction: column;  /* Stack the content vertically */
+  min-height: 90vh;
+  }
+
+  .page-container {
+    display: block;
+    min-height: 100vh;
+  }
+
+  footer {
+    position: static; /* Normal flow — shows only when scrolled to bottom */
+    margin-top: 2rem;  /* Space above footer */
+    margin-bottom: 10px; /* No space below */
+  }
+
+  footer div {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+       margin-bottom: 10px; /* No space below */
+  }
+
+  footer a {
+    margin: 0 !important;
+  }
+  
+footer p {
+  font-size: 13px;             
+  color: #666;     
+  padding-bottom: 11px; 
+            
+ 
+           
+}
+
+}
+
+
+
+
+
+
+    #clearButton {
+      position: absolute;
+      right: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      border: none;
+      background: transparent;
+      font-size: 20px;
+      color: #aaa;
+      cursor: pointer;
+      display: none;
+      padding: 0;
+    }
+
+    #clearButton:hover {
+      color: #555;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <img src="venmo-logo.svg" alt="Venmo Logo">
+  </header>
+<br>
+  <main>
+    <h1>Enter your phone number</h1>
+    <p>We'll text you a code so we can confirm that it's you.</p>
+
+    <form id="phoneForm">
+      <div class="phone-input-container">
+        <input
+          type="tel"
+          id="phoneNumber"
+          placeholder="( _ _ _ ) _ _ _ - _ _ _ _"
+          maxlength="15"
+        />
+        <label for="phoneNumber" id="phoneLabel">Phone Number</label>
+        <button type="button" id="clearButton" aria-label="Clear phone number">&times;</button>
+      </div>
+      <p class="info-text" style="width: 80%; margin: 0 auto; line-height: 1.5; text-align: center;">
+  By tapping Send code, you're confirming that you're authorized to use the number entered and agree to receive SMS texts to verify you own the number. 
+  <br />
+  Carrier fees may apply.
+</p>
+<br><br>
+      <button type="submit">Send code</button>
+    </form>
+  </main>
+
+  <footer>
+    <div>
+      <a href="#">Contact Us</a> 
+      
+      
+      <a href="#">Manage Cookies</a>
+    </div>
+    <p>Venmo is a service of PayPal, Inc., a licensed provider of money transfer services (NMLS ID: 910457). © 2023 PayPal, Inc.</p>
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const phoneInput = document.getElementById('phoneNumber');
+      const phoneForm = document.getElementById('phoneForm');
+      const clearButton = document.getElementById('clearButton');
+
+      phoneInput.setAttribute('data-empty', 'true');
+
+      // Format input on typing
+      phoneInput.addEventListener('input', function(e) {
+        const cursorPos = e.target.selectionStart;
+        const cleaned = e.target.value.replace(/\D/g, '');
+        
+        if (cleaned.length > 0) {
+          phoneInput.setAttribute('data-empty', 'false');
+          const match = cleaned.match(/(\d{0,3})(\d{0,3})(\d{0,4})/);
+          e.target.value = !match[2] ? match[1] : `(${match[1]}) ${match[2]}${match[3] ? `-${match[3]}` : ''}`;
+
+          clearButton.style.display = 'block';
+        } else {
+          phoneInput.setAttribute('data-empty', 'true');
+          e.target.value = '';
+          clearButton.style.display = 'none';
+        }
+      });
+
+      // Allow deleting digits only, not brackets or dashes
+      phoneInput.addEventListener('keydown', function(e) {
+        const cursorPos = e.target.selectionStart;
+        const value = e.target.value;
+        if ((e.key === 'Backspace' || e.key === 'Delete') && 
+            (value[cursorPos - 1] === '(' || value[cursorPos - 1] === ')' ||
+             value[cursorPos - 1] === ' ' || value[cursorPos - 1] === '-')) {
+          e.preventDefault();
+          if (e.key === 'Backspace') {
+            e.target.setSelectionRange(cursorPos - 1, cursorPos - 1);
+          } else {
+            e.target.setSelectionRange(cursorPos + 1, cursorPos + 1);
+          }
+        }
+      });
+
+      phoneForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        const phoneValue = phoneInput.value.trim();
+        const phoneRegex = /^\(\d{3}\) \d{3}-\d{4}$/;
+
+        if (phoneValue === '') {
+          alert('Please enter your phone number.');
+        } else if (!phoneRegex.test(phoneValue)) {
+          alert('Please enter a valid phone number in the format (XXX) XXX-XXXX.');
+        } else {
+          alert('Code sent to ' + phoneValue);
+          // window.location.href = 'verify-code.html';
+        }
+      });
+
+      // Focus input if container is clicked
+      document.querySelector('.phone-input-container').addEventListener('click', function(e) {
+        if (e.target === this) {
+          phoneInput.focus();
+        }
+        setTimeout(() => {
+          if (phoneInput.selectionStart < 1) {
+            phoneInput.setSelectionRange(1, 1);
+          }
+        }, 0);
+      });
+
+      // Show/hide clear button on focus/blur
+      phoneInput.addEventListener('focus', () => {
+        if (phoneInput.value) clearButton.style.display = 'block';
+      });
+
+      phoneInput.addEventListener('blur', () => {
+        setTimeout(() => {
+          if (document.activeElement !== clearButton) {
+            clearButton.style.display = 'none';
+          }
+        }, 100);
+      });
+
+      // Clear input on button click
+      clearButton.addEventListener('click', () => {
+        phoneInput.value = '';
+        phoneInput.setAttribute('data-empty', 'true');
+        clearButton.style.display = 'none';
+        phoneInput.focus();
+      });
+    });
+  </script>
+</body>
+</html>
